@@ -72,6 +72,13 @@
       <description></description>
     </item>
     <item>
+      <title>Linux</title>
+      <link>http://localhost:1313/cultivation-lab/tags/linux/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Meta</title>
       <link>http://localhost:1313/cultivation-lab/tags/meta/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
@@ -79,10 +86,31 @@
       <description></description>
     </item>
     <item>
+      <title>Minecraft</title>
+      <link>http://localhost:1313/cultivation-lab/tags/minecraft/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/minecraft/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Papermc</title>
+      <link>http://localhost:1313/cultivation-lab/tags/papermc/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/papermc/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Python</title>
       <link>http://localhost:1313/cultivation-lab/tags/python/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Self-Hosting</title>
+      <link>http://localhost:1313/cultivation-lab/tags/self-hosting/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/self-hosting/</guid>
       <description></description>
     </item>
     <item>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto" data-theme="auto">
+
+<head><script src="/cultivation-lab/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=cultivation-lab/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>A cheap, low-maintenance Minecraft server for four friends — and the things that tripped me up | Cultivating Ideas</title>
+<meta name="keywords" content="minecraft, self-hosting, papermc, linux">
+<meta name="description" content="I wanted a survival server four friends could jump on whenever — cheap to run, and low-maintenance enough that I&rsquo;d basically forget it was there. Vanilla-ish, no giant modpack, just a persistent world that stays up on its own. This is the whole build start to finish. And because the stuff that actually cost me an evening was never the stuff I expected, I&rsquo;ve left every gotcha in place, right where it bit me.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/cultivation-lab/posts/cheap-low-maintenance-minecraft-server/">
+<link crossorigin="anonymous" href="/cultivation-lab/assets/css/stylesheet.6ff46447b1fa3f8a5cc0bcae48088decc3ae37f5fbc99406a3aefc3bf0e6044a.css" integrity="sha256-b/RkR7H6P4pcwLyuSAiN7MOuN/X7yZQGo678O/DmBEo=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/cultivation-lab/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/cultivation-lab/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/cultivation-lab/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/cultivation-lab/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/cultivation-lab/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/cultivation-lab/posts/cheap-low-maintenance-minecraft-server/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+                color-scheme: dark;
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .toc {
+                background: var(--entry);
+            }
+        }
+
+    </style>
+</noscript>
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else if (localStorage.getItem("pref-theme") === "light") {
+       document.querySelector("html").dataset.theme = 'light';
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.querySelector("html").dataset.theme = 'dark';
+    } else {
+        document.querySelector("html").dataset.theme = 'light';
+    }
+
+</script>
+</head>
+<body id="top">
+    <header class="header">
+    <nav class="header-nav">
+        <div class="logo">
+            <a href="http://localhost:1313/cultivation-lab/" accesskey="h" title="Cultivating Ideas (Alt + H)">Cultivating Ideas</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" class="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg class="moon" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg class="sun" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu" class="menu">
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    
+    <h1 class="post-title entry-hint-parent">
+      A cheap, low-maintenance Minecraft server for four friends — and the things that tripped me up
+    </h1>
+    <div class="post-meta">
+
+<span title='2026-08-08 00:00:00 +0000 UTC'>August 8, 2026</span>
+
+</div>
+  </header> 
+  <div class="post-content md-content"><p>I wanted a survival server four friends could jump on whenever — cheap to run, and low-maintenance enough that I&rsquo;d basically forget it was there. Vanilla-ish, no giant modpack, just a persistent world that stays up on its own. This is the whole build start to finish. And because the stuff that actually cost me an evening was never the stuff I expected, I&rsquo;ve left every gotcha in place, right where it bit me.</p>
+<h2 id="the-box">The box<a hidden class="anchor" aria-hidden="true" href="#the-box">#</a></h2>
+<p>I&rsquo;m on a Contabo Cloud VPS 10 — 8GB RAM, Ubuntu Server. For four players on a vanilla-ish world that&rsquo;s plenty. For a small server the RAM headroom matters more than core count, and this tier is cheap monthly, which was the entire point.</p>
+<h2 id="papermc-and-the-java-version-that-has-to-match">PaperMC and the Java version that has to match<a hidden class="anchor" aria-hidden="true" href="#papermc-and-the-java-version-that-has-to-match">#</a></h2>
+<p>The server runs Minecraft 26.2 on <strong>PaperMC</strong> rather than the vanilla jar. Paper is a drop-in replacement that performs better and lets me run plugins later — no downside for a survival server.</p>
+<p>First gotcha, and it&rsquo;s a startup-blocker: <strong>the Java version has to match the Minecraft version.</strong> MC 26.x needs Java 25 or newer. I used Amazon Corretto 25. If you just install whatever JDK your package manager hands you by default, you can easily land on something older and Paper simply won&rsquo;t boot. Sort the Java version out first.</p>
+<p>The server lives at <code>/home/minecraft/mcserver</code> and runs as a dedicated <code>minecraft</code> user. Don&rsquo;t run a game server as root.</p>
+<h2 id="keeping-it-alive-systemd--screen">Keeping it alive: systemd + screen<a hidden class="anchor" aria-hidden="true" href="#keeping-it-alive-systemd--screen">#</a></h2>
+<p>I run it as a systemd service, so it comes back after a reboot and auto-restarts if it crashes. Start/stop/restart is just:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo systemctl restart minecraft
+</span></span></code></pre></div><p>The live console runs inside a <code>screen</code> session owned by the <code>minecraft</code> user. To attach and actually see the console:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>su - minecraft -c <span style="color:#e6db74">&#34;screen -r&#34;</span>
+</span></span></code></pre></div><p>Detach with <strong>Ctrl+A</strong> then <strong>D</strong>.</p>
+<p>Gotcha: <strong>never hit Ctrl+C in that console</strong> — it doesn&rsquo;t detach, it kills the server. And for anything a running server might overwrite when it shuts down (<code>server.properties</code> is the big one), stop the service first, make your edit, then start it again. Otherwise your change gets clobbered on the next restart.</p>
+<h2 id="the-sudo--u-minecraft-quirk-that-ate-an-hour">The <code>sudo -u minecraft</code> quirk that ate an hour<a hidden class="anchor" aria-hidden="true" href="#the-sudo--u-minecraft-quirk-that-ate-an-hour">#</a></h2>
+<p>Here&rsquo;s one that surprised me: <code>sudo -u minecraft ...</code> doesn&rsquo;t work in my setup. So my workflow for putting any file where the server can read it is: download or edit it as root, then hand ownership over to the <code>minecraft</code> user:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown minecraft: server-icon.png
+</span></span></code></pre></div><p>Small thing, but I spent real time on &ldquo;why can&rsquo;t the server see this file&rdquo; before it clicked that it was an ownership problem, not a path problem.</p>
+<h2 id="giving-it-a-face-motd-and-icon">Giving it a face: MOTD and icon<a hidden class="anchor" aria-hidden="true" href="#giving-it-a-face-motd-and-icon">#</a></h2>
+<p>Two cosmetic touches that punch way above their weight in the multiplayer list.</p>
+<p>The <strong>MOTD</strong> is the couple of lines shown under the server name. Colors use section-sign codes — and this one got me good: you <strong>can&rsquo;t</strong> put a raw <code>§</code> in <code>server.properties</code>, it breaks the line. You have to write the color codes as <code>\u00A7</code> escapes, and join the two lines with <code>\n</code>. So it&rsquo;s a single line in the file that looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-properties" data-lang="properties"><span style="display:flex;"><span><span style="color:#a6e22e">motd</span><span style="color:#f92672">=</span><span style="color:#e6db74">\u00A79My Survival Server\n\u00A76Under construction — come build</span>
+</span></span></code></pre></div><p><code>\u00A79</code> is blue, <code>\u00A76</code> is gold.</p>
+<p>The <strong>icon</strong> is a small PNG the client shows next to your server. Gotcha: it must be <strong>exactly 64×64</strong>, and the filename is case-sensitive — <code>server-icon.png</code>, in the server root. Drop it in, then (per the ownership thing above):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>chown minecraft: server-icon.png
+</span></span></code></pre></div><p>Two more traps here. The server only reads the icon <strong>at startup</strong>, so restart to pick up a change. And the <strong>client caches it</strong> — if you swap the icon and don&rsquo;t see the new one, it&rsquo;s not broken, you just need to refresh (or remove and re-add) the server entry in your multiplayer list.</p>
+<h2 id="one-tuning-change-view-distance">One tuning change: view-distance<a hidden class="anchor" aria-hidden="true" href="#one-tuning-change-view-distance">#</a></h2>
+<p>I bumped <code>view-distance</code> from the default 10 up to 12 — a bit more world visible, still comfortable for four players on this box. I left <code>simulation-distance</code> at 10, because that&rsquo;s the one that actually costs CPU (it&rsquo;s what&rsquo;s being ticked, not just rendered).</p>
+<h2 id="plugins">Plugins<a hidden class="anchor" aria-hidden="true" href="#plugins">#</a></h2>
+<p>This is where a small server earns its keep. Everything&rsquo;s from Hangar (Paper&rsquo;s plugin site) unless I say otherwise.</p>
+<h3 id="bluemap--a-live-3d-web-map">BlueMap — a live 3D web map<a hidden class="anchor" aria-hidden="true" href="#bluemap--a-live-3d-web-map">#</a></h3>
+<p>BlueMap renders the world into a browsable 3D map you open in a browser. It runs its own little webserver on port 8100, which I opened in the firewall. You view it at <code>http://&lt;server-ip&gt;:8100</code>.</p>
+<p>Worth knowing: mine is plain http and publicly reachable — anyone with the address can look at it. It&rsquo;s read-only, but it does reveal builds and base locations. For a trusted friend group that&rsquo;s a fine tradeoff; just go in eyes-open that the map is as public as its address is.</p>
+<h3 id="chunky--pre-generate-the-world">Chunky — pre-generate the world<a hidden class="anchor" aria-hidden="true" href="#chunky--pre-generate-the-world">#</a></h3>
+<p>New chunks are the laggy part of Minecraft: the game generates terrain the first time someone walks into it, and that&rsquo;s where the stutter comes from. Chunky generates it ahead of time, while nobody&rsquo;s around. I pre-generated a 3000-block radius around spawn:</p>
+<pre tabindex="0"><code>chunky radius 3000
+</code></pre><pre tabindex="0"><code>chunky start
+</code></pre><p>It&rsquo;s CPU-heavy while it runs, so do it with friends offline. Progress survives restarts — <code>chunky pause</code> and <code>chunky continue</code> to manage it, <code>chunky progress</code> for an ETA. Nice bonus: BlueMap picks up the newly generated chunks automatically, so pre-genning also fills in the map.</p>
+<p>One thing that confused me early on: <strong>server console commands take no leading slash.</strong> The commands above are typed straight into the console as <code>chunky ...</code>. In-game as an op, the <em>same</em> commands take a leading <code>/</code>.</p>
+<h3 id="axgraves--death-chests">AxGraves — death chests<a hidden class="anchor" aria-hidden="true" href="#axgraves--death-chests">#</a></h3>
+<p>Vanilla death scatters your stuff on the ground with a timer before it&rsquo;s gone forever, which for a casual group is just misery. AxGraves catches everything — items and XP — in a floating grave right where you died. I tuned it for a family server: graves never expire, only the owner can open theirs, and it keeps your XP on pickup. Nice detail: it&rsquo;s packet-based, so nothing extra actually gets written into the world file.</p>
+<h3 id="prism--block-logging-and-rollback-grief-insurance">Prism — block logging and rollback (grief insurance)<a hidden class="anchor" aria-hidden="true" href="#prism--block-logging-and-rollback-grief-insurance">#</a></h3>
+<p>This is the one plugin I wouldn&rsquo;t run a shared world without. It logs who placed and broke what, so if something gets griefed — or you fat-finger a build yourself — you can roll it back.</p>
+<p>Two gotchas, back to back:</p>
+<p>First, my actual first choice was CoreProtect, and there just wasn&rsquo;t a working free build for 26.2 — current-MC support was paywalled or broken. So I switched to <strong>Prism</strong>, which does the same job.</p>
+<p>Second, Prism needs the <strong>NBTAPI</strong> library plugin or it won&rsquo;t even enable — and the copy of NBTAPI on Hangar is stale, stuck on an old MC version. I had to grab NBTAPI from <strong>Modrinth</strong> instead to get a build that works on 26.2.</p>
+<p>For future me — always preview before you apply. Rollback params are <code>r:&lt;n&gt;</code> for radius, <code>since:&lt;time&gt;</code> like <code>since:2h</code>, and <code>p:&lt;player&gt;</code> to scope it to one person. The flow is preview, then apply or cancel:</p>
+<pre tabindex="0"><code>/prism preview-rollback r:10 since:2h p:&lt;player&gt;
+</code></pre><pre tabindex="0"><code>/prism preview-apply
+</code></pre><pre tabindex="0"><code>/prism preview-cancel
+</code></pre><p><code>/prism near</code> and <code>/prism lookup</code> inspect history without changing anything. Docs are at docs.prism-mc.org.</p>
+<h2 id="backups">Backups<a hidden class="anchor" aria-hidden="true" href="#backups">#</a></h2>
+<p>A nightly cron at 3am tars up the world folder. Nothing clever, but it means a bad day is a restore instead of a rebuild. Prism runs its own record purge at midnight, deliberately clear of the backup so they don&rsquo;t collide.</p>
+<h2 id="the-meta-lesson-pin-your-versions">The meta-lesson: pin your versions<a hidden class="anchor" aria-hidden="true" href="#the-meta-lesson-pin-your-versions">#</a></h2>
+<p>If there&rsquo;s one thing I took away from this build, it&rsquo;s that Paper and its plugins move fast and don&rsquo;t always agree with each other across versions. Two of my three real headaches were pure compatibility problems — CoreProtect had no 26.2 build, and NBTAPI&rsquo;s main listing was stale. So my rule now: before I update Paper or any plugin, I check that each plugin actually lists my exact MC version on its own page, and I take a manual world backup before bumping anything. Everything here is pinned on purpose.</p>
+<p>That&rsquo;s the whole thing. Four friends, a cheap box, and a world that stays up on its own.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/cultivation-lab/tags/minecraft/">Minecraft</a></li>
+      <li><a href="http://localhost:1313/cultivation-lab/tags/self-hosting/">Self-Hosting</a></li>
+      <li><a href="http://localhost:1313/cultivation-lab/tags/papermc/">Papermc</a></li>
+      <li><a href="http://localhost:1313/cultivation-lab/tags/linux/">Linux</a></li>
+    </ul>
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2026 <a href="http://localhost:1313/cultivation-lab/">Cultivating Ideas</a></span> · 
+
+    
+    
+    <span>
+        Powered by
+        <a href="https://gohugo.io/?utm_source=papermod" rel="noopener" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" id="top-link" class="top-link hidden" aria-label="go to top" title="Go to Top (Alt + G)" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevrons-up">
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu');
+    if (menu) {
+        
+        const scrollPosition = localStorage.getItem("menu-scroll-position");
+        if (scrollPosition) {
+            menu.scrollLeft = parseInt(scrollPosition, 10);
+        }
+        
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var toplink = document.getElementById("top-link");
+    window.onscroll = function () {
+        const scrollThreshold = window.innerHeight;
+        if (document.body.scrollTop > scrollThreshold || document.documentElement.scrollTop > scrollThreshold) {
+            toplink.classList.remove("hidden");
+        } else {
+            toplink.classList.add("hidden");
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        const html = document.querySelector("html");
+        if (html.dataset.theme === "dark") {
+            html.dataset.theme = 'light';
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            html.dataset.theme = 'dark';
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>
