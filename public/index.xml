@@ -23,5 +23,12 @@
       <description>&lt;p&gt;If you&amp;rsquo;re reading this, it&amp;rsquo;s coming to you from a blog that costs me exactly nothing to run. No hosting bill, no subscription, no &amp;ldquo;your free trial is ending&amp;rdquo; emails. Just some Markdown files in a folder, a static site generator called Hugo, and GitHub quietly serving it all to the internet for free.&lt;/p&gt;
 &lt;p&gt;I wanted to write down exactly how I got here — commands and all — partly so I remember it, and partly in case you&amp;rsquo;re staring down the same &amp;ldquo;I guess I need a website now&amp;rdquo; feeling I started with. Fair warning: I hit four snags along the way. I&amp;rsquo;ve left them in, because knowing they&amp;rsquo;re coming is most of the battle.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>How I Set Up Godot (and a Claude Code Project) on a Beat-Up ThinkPad</title>
+      <link>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</guid>
+      <description>&lt;p&gt;I haven&amp;rsquo;t written a single line of gameplay code yet. No player sprite, no jump, nothing you could screenshot and call a game. What I do have is a Godot project that opens correctly, a plan I trust enough to hand to an AI coding assistant, and a decent case for why that matters more than it sounds like it should. This is the planning-and-setup post, not the &amp;ldquo;look what I built&amp;rdquo; post — that one comes later.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

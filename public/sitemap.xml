@@ -11,16 +11,31 @@
     <loc>http://localhost:1313/cultivation-lab/posts/</loc>
     <lastmod>2026-08-08T09:02:38-05:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/cultivation-lab/tags/claude-code/</loc>
+    <lastmod>2026-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/cultivation-lab/tags/gamedev/</loc>
+    <lastmod>2026-08-08T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/cultivation-lab/tags/github-pages/</loc>
     <lastmod>2026-08-08T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/cultivation-lab/tags/godot/</loc>
+    <lastmod>2026-08-08T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/cultivation-lab/posts/building-this-blog/</loc>
+    <lastmod>2026-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</loc>
     <lastmod>2026-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/cultivation-lab/tags/how-to/</loc>
     <lastmod>2026-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/cultivation-lab/tags/hugo/</loc>
+    <lastmod>2026-08-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/cultivation-lab/tags/indie-dev/</loc>
     <lastmod>2026-08-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/cultivation-lab/tags/meta/</loc>

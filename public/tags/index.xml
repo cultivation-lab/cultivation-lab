@@ -9,10 +9,31 @@
     <lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/cultivation-lab/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Claude-Code</title>
+      <link>http://localhost:1313/cultivation-lab/tags/claude-code/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/claude-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Gamedev</title>
+      <link>http://localhost:1313/cultivation-lab/tags/gamedev/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/gamedev/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Github-Pages</title>
       <link>http://localhost:1313/cultivation-lab/tags/github-pages/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/github-pages/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Godot</title>
+      <link>http://localhost:1313/cultivation-lab/tags/godot/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/godot/</guid>
       <description></description>
     </item>
     <item>
@@ -27,6 +48,13 @@
       <link>http://localhost:1313/cultivation-lab/tags/hugo/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Indie-Dev</title>
+      <link>http://localhost:1313/cultivation-lab/tags/indie-dev/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/indie-dev/</guid>
       <description></description>
     </item>
     <item>
