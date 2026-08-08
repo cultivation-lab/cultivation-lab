@@ -9,6 +9,20 @@
     <lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/cultivation-lab/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
+      <title>Ai-Assisted-Coding</title>
+      <link>http://localhost:1313/cultivation-lab/tags/ai-assisted-coding/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/ai-assisted-coding/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Claude</title>
+      <link>http://localhost:1313/cultivation-lab/tags/claude/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/claude/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Claude-Code</title>
       <link>http://localhost:1313/cultivation-lab/tags/claude-code/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
@@ -62,6 +76,20 @@
       <link>http://localhost:1313/cultivation-lab/tags/meta/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/meta/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>http://localhost:1313/cultivation-lab/tags/python/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>http://localhost:1313/cultivation-lab/tags/testing/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/testing/</guid>
       <description></description>
     </item>
   </channel>

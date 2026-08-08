@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Gamedev on Cultivating Ideas</title>
-    <link>http://localhost:1313/cultivation-lab/tags/gamedev/</link>
-    <description>Recent content in Gamedev on Cultivating Ideas</description>
+    <title>Claude on Cultivating Ideas</title>
+    <link>http://localhost:1313/cultivation-lab/tags/claude/</link>
+    <description>Recent content in Claude on Cultivating Ideas</description>
     <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/cultivation-lab/tags/gamedev/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/cultivation-lab/tags/claude/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>A week building ORPHANED: letting Claude write the game, keeping it honest</title>
       <link>http://localhost:1313/cultivation-lab/posts/a-week-building-orphaned/</link>
@@ -15,13 +15,6 @@
       <guid>http://localhost:1313/cultivation-lab/posts/a-week-building-orphaned/</guid>
       <description>&lt;p&gt;ORPHANED is a tiny always-on-top window with a pixel creature living inside it. It grows on real-world time whether the program is open or not, it fights hostile &amp;ldquo;programs&amp;rdquo; when you feel like picking a fight, and if you neglect it long enough it dies — permanently — and gets written into an archive of every version that came before.&lt;/p&gt;
 &lt;p&gt;I spent about a week building it. But the part worth writing down isn&amp;rsquo;t the game. It&amp;rsquo;s this: I can&amp;rsquo;t really write a program this size on my own, so I didn&amp;rsquo;t. Claude wrote almost all of the code. My job was deciding what the thing should do, running it, playing it, and catching it when it quietly drifted off the rails. Two things kept a week of AI-generated code from collapsing into an unmaintainable mess — a written rulebook and a test suite — and I didn&amp;rsquo;t appreciate either until I&amp;rsquo;d already made the mistakes that made me need them.&lt;/p&gt;</description>
-    </item>
-    <item>
-      <title>How I Set Up Godot (and a Claude Code Project) on a Beat-Up ThinkPad</title>
-      <link>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</link>
-      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</guid>
-      <description>&lt;p&gt;I haven&amp;rsquo;t written a single line of gameplay code yet. No player sprite, no jump, nothing you could screenshot and call a game. What I do have is a Godot project that opens correctly, a plan I trust enough to hand to an AI coding assistant, and a decent case for why that matters more than it sounds like it should. This is the planning-and-setup post, not the &amp;ldquo;look what I built&amp;rdquo; post — that one comes later.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
