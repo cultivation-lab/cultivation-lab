@@ -45,5 +45,12 @@
       <guid>http://localhost:1313/cultivation-lab/posts/godot-claude-code-thinkpad-setup/</guid>
       <description>&lt;p&gt;I haven&amp;rsquo;t written a single line of gameplay code yet. No player sprite, no jump, nothing you could screenshot and call a game. What I do have is a Godot project that opens correctly, a plan I trust enough to hand to an AI coding assistant, and a decent case for why that matters more than it sounds like it should. This is the planning-and-setup post, not the &amp;ldquo;look what I built&amp;rdquo; post — that one comes later.&lt;/p&gt;</description>
     </item>
+    <item>
+      <title>Messing with an ESP32-C3 Super Mini</title>
+      <link>http://localhost:1313/cultivation-lab/posts/messing-with-an-esp32-c3-super-mini/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/posts/messing-with-an-esp32-c3-super-mini/</guid>
+      <description>&lt;p&gt;A HackerBox dropped an ESP32-C3 Super Mini on my desk — a thumb-sized board with WiFi, Bluetooth, and a USB-C port, all for a couple of bucks. This is the whole path from sealed bag to &amp;ldquo;it&amp;rsquo;s printing every WiFi network in my house,&amp;rdquo; including the ten minutes Ubuntu 24.04 spent flat-out refusing to open the Arduino IDE. If you&amp;rsquo;ve got the same board and the same OS, you can follow along and skip the head-scratching.&lt;/p&gt;</description>
+    </item>
   </channel>
 </rss>

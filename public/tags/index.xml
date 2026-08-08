@@ -16,6 +16,13 @@
       <description></description>
     </item>
     <item>
+      <title>Arduino</title>
+      <link>http://localhost:1313/cultivation-lab/tags/arduino/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/arduino/</guid>
+      <description></description>
+    </item>
+    <item>
       <title>Claude</title>
       <link>http://localhost:1313/cultivation-lab/tags/claude/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
@@ -27,6 +34,20 @@
       <link>http://localhost:1313/cultivation-lab/tags/claude-code/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/claude-code/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Electronics</title>
+      <link>http://localhost:1313/cultivation-lab/tags/electronics/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/electronics/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Esp32</title>
+      <link>http://localhost:1313/cultivation-lab/tags/esp32/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/esp32/</guid>
       <description></description>
     </item>
     <item>
@@ -118,6 +139,13 @@
       <link>http://localhost:1313/cultivation-lab/tags/testing/</link>
       <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/cultivation-lab/tags/testing/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ubuntu</title>
+      <link>http://localhost:1313/cultivation-lab/tags/ubuntu/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/tags/ubuntu/</guid>
       <description></description>
     </item>
   </channel>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Arduino on Cultivating Ideas</title>
+    <link>http://localhost:1313/cultivation-lab/tags/arduino/</link>
+    <description>Recent content in Arduino on Cultivating Ideas</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/cultivation-lab/tags/arduino/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Messing with an ESP32-C3 Super Mini</title>
+      <link>http://localhost:1313/cultivation-lab/posts/messing-with-an-esp32-c3-super-mini/</link>
+      <pubDate>Sat, 08 Aug 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/cultivation-lab/posts/messing-with-an-esp32-c3-super-mini/</guid>
+      <description>&lt;p&gt;A HackerBox dropped an ESP32-C3 Super Mini on my desk — a thumb-sized board with WiFi, Bluetooth, and a USB-C port, all for a couple of bucks. This is the whole path from sealed bag to &amp;ldquo;it&amp;rsquo;s printing every WiFi network in my house,&amp;rdquo; including the ten minutes Ubuntu 24.04 spent flat-out refusing to open the Arduino IDE. If you&amp;rsquo;ve got the same board and the same OS, you can follow along and skip the head-scratching.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
