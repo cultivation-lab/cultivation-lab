@@ -5,29 +5,153 @@ draft: false
 tags: ["minecraft", "self-hosting", "papermc", "linux"]
 ---
 
-I wanted a survival server four friends could jump on whenever — cheap to run, and low-maintenance enough that I'd basically forget it was there. Vanilla-ish, no giant modpack, just a persistent world that stays up on its own. This is the whole build start to finish. And because the stuff that actually cost me an evening was never the stuff I expected, I've left every gotcha in place, right where it bit me.
+I wanted a survival server four friends could jump on whenever — cheap to run, and low-maintenance enough that I'd basically forget it was there. Vanilla-ish, no giant modpack, just a persistent world that stays up on its own. This is the full build start to finish, commands and all. And because the stuff that actually cost me an evening was never the stuff I expected, I've left every gotcha in place, right where it bit me.
 
 ## The box
 
 I'm on a Contabo Cloud VPS 10 — 8GB RAM, Ubuntu Server. For four players on a vanilla-ish world that's plenty. For a small server the RAM headroom matters more than core count, and this tier is cheap monthly, which was the entire point.
 
-## PaperMC and the Java version that has to match
+Everything below happens over SSH on that box. I do most of it as root (more on that quirk later), so where you see `sudo`, drop it if you're already root.
 
-The server runs Minecraft 26.2 on **PaperMC** rather than the vanilla jar. Paper is a drop-in replacement that performs better and lets me run plugins later — no downside for a survival server.
+## A dedicated user for the server
 
-First gotcha, and it's a startup-blocker: **the Java version has to match the Minecraft version.** MC 26.x needs Java 25 or newer. I used Amazon Corretto 25. If you just install whatever JDK your package manager hands you by default, you can easily land on something older and Paper simply won't boot. Sort the Java version out first.
+Don't run a game server as root. Make a user that owns the server and nothing else:
 
-The server lives at `/home/minecraft/mcserver` and runs as a dedicated `minecraft` user. Don't run a game server as root.
+```bash
+sudo adduser --disabled-password --gecos "" minecraft
+```
 
-## Keeping it alive: systemd + screen
+That gives me a `minecraft` user with a home at `/home/minecraft` and no password — I get into it from a root shell when I need to, rather than logging in as it directly. The whole server will live at `/home/minecraft/mcserver`:
 
-I run it as a systemd service, so it comes back after a reboot and auto-restarts if it crashes. Start/stop/restart is just:
+```bash
+mkdir -p /home/minecraft/mcserver
+```
+
+## Installing Java 25 (Amazon Corretto)
+
+First real gotcha, and it's a startup-blocker: **the Java version has to match the Minecraft version.** MC 26.x needs Java 25 or newer. If you just install whatever JDK `apt` gives you by default, you can easily land on something older and Paper simply won't boot with a cryptic class-version error.
+
+I used Amazon Corretto 25. The clean way on Ubuntu is to add Amazon's apt repo:
+
+```bash
+wget -O - https://apt.corretto.aws/corretto.key | sudo gpg --dearmor -o /usr/share/keyrings/corretto-keyring.gpg
+```
+
+```bash
+echo "deb [signed-by=/usr/share/keyrings/corretto-keyring.gpg] https://apt.corretto.aws stable main" | sudo tee /etc/apt/sources.list.d/corretto.list
+```
+
+```bash
+sudo apt-get update && sudo apt-get install -y java-25-amazon-corretto-jdk
+```
+
+Then confirm it's actually 25 before you go any further:
+
+```bash
+java -version
+```
+
+You want to see `Corretto-25.x` in that output. If it says anything lower, stop and fix it here — nothing downstream will work otherwise.
+
+## Getting Paper onto the box
+
+The server runs **PaperMC** rather than the vanilla jar. Paper is a drop-in replacement that performs better and takes plugins — no real downside for a survival server.
+
+Here's a trap I hit chasing an old tutorial: **the old `api.papermc.io/v2` download URLs are dead** (they stopped getting builds at the end of 2025). Don't copy a `wget` line from some 2024 blog — it'll 404. Grab the current jar from the official downloads page instead: [papermc.io/downloads](https://papermc.io/downloads). On a headless box, find the 26.2 build, copy the download link, and pull it straight in as `paper.jar`:
+
+```bash
+cd /home/minecraft/mcserver
+```
+
+```bash
+wget "PASTE_THE_26.2_DOWNLOAD_LINK_HERE" -O paper.jar
+```
+
+## First boot and the EULA
+
+Run the jar once by hand. It'll generate the config files, then immediately stop and complain that you haven't accepted the EULA:
+
+```bash
+java -jar paper.jar --nogui
+```
+
+That first run creates `eula.txt`, `server.properties`, and the rest. Accept the EULA:
+
+```bash
+echo "eula=true" > eula.txt
+```
+
+Now's the moment to hand the whole folder to the `minecraft` user, since I ran that first boot as root and root now owns those fresh files:
+
+```bash
+chown -R minecraft: /home/minecraft/mcserver
+```
+
+## server.properties: the few things I actually changed
+
+The first run generated `server.properties`. The handful I set for this server:
+
+```properties
+online-mode=true
+max-players=4
+server-port=25565
+```
+
+`online-mode=true` means only real, authenticated Minecraft accounts can join — leave that on. `max-players=4` is just us. Port 25565 is the default.
+
+Gotcha worth knowing before you go hunting for it: **`pvp` is no longer in `server.properties`.** It moved to an in-game gamerule back in 1.21.2, so a `pvp=true` line here does nothing on 26.2. If you want to toggle it, it's `/gamerule pvp true|false` now, not this file.
+
+One workflow note that'll save you confusion later: a running server rewrites `server.properties` on shutdown, so it'll clobber hand-edits. **Stop the server first, edit, then start it** — don't edit it live.
+
+## Running it as a systemd service
+
+I want the server to come back after a reboot and restart itself if it crashes, without me babysitting it. That's a systemd service. I also want a real console I can attach to, so the service launches the server inside a `screen` session.
+
+Install screen first:
+
+```bash
+sudo apt-get install -y screen
+```
+
+Then the unit file at `/etc/systemd/system/minecraft.service`:
+
+```ini
+[Unit]
+Description=Minecraft Server (Paper)
+After=network.target
+
+[Service]
+User=minecraft
+WorkingDirectory=/home/minecraft/mcserver
+ExecStart=/usr/bin/screen -DmS minecraft /usr/bin/java -Xms6G -Xmx6G -jar paper.jar --nogui
+ExecStop=/usr/bin/screen -p 0 -S minecraft -X eval 'stuff "stop"\015'
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+```
+
+A few things going on there. It runs as the `minecraft` user out of the server directory. `screen -DmS minecraft` starts a named screen session (`minecraft`) in the foreground so systemd can supervise it — but I can still attach to it. The `-Xms6G -Xmx6G` gives the JVM 6 GB; on an 8GB box that leaves room for the OS and BlueMap's rendering later — tune to your machine. And `ExecStop` sends the literal `stop` command into the console so the world saves cleanly instead of getting hard-killed.
+
+Enable it (so it survives reboot) and start it:
+
+```bash
+sudo systemctl daemon-reload
+```
+
+```bash
+sudo systemctl enable --now minecraft
+```
+
+From here on, start/stop/restart is just:
 
 ```bash
 sudo systemctl restart minecraft
 ```
 
-The live console runs inside a `screen` session owned by the `minecraft` user. To attach and actually see the console:
+## The console lives inside screen
+
+To actually see the live console and type server commands, attach to the screen session as the `minecraft` user:
 
 ```bash
 su - minecraft -c "screen -r"
@@ -35,17 +159,31 @@ su - minecraft -c "screen -r"
 
 Detach with **Ctrl+A** then **D**.
 
-Gotcha: **never hit Ctrl+C in that console** — it doesn't detach, it kills the server. And for anything a running server might overwrite when it shuts down (`server.properties` is the big one), stop the service first, make your edit, then start it again. Otherwise your change gets clobbered on the next restart.
+Gotcha: **never hit Ctrl+C in that console** — it doesn't detach, it kills the server. Ctrl+A then D every time.
+
+One more thing that confused me early: **server console commands take no leading slash.** In that screen console you type `chunky ...` or `whitelist ...` bare. In-game as an op, the *same* commands take a leading `/`.
 
 ## The `sudo -u minecraft` quirk that ate an hour
 
-Here's one that surprised me: `sudo -u minecraft ...` doesn't work in my setup. So my workflow for putting any file where the server can read it is: download or edit it as root, then hand ownership over to the `minecraft` user:
+Here's one that surprised me: `sudo -u minecraft ...` doesn't work in my setup. So whenever I need to drop a file where the server can read it, my workflow is: download or edit it as root, then hand ownership over:
 
 ```bash
 chown minecraft: server-icon.png
 ```
 
-Small thing, but I spent real time on "why can't the server see this file" before it clicked that it was an ownership problem, not a path problem.
+Small thing, but I spent real time on "why can't the server see this file" before it clicked that it was an ownership problem, not a path problem. If a file you added is invisible to the server, check who owns it first.
+
+## Opening the firewall
+
+The server won't be reachable until you let the port through:
+
+```bash
+sudo ufw allow 25565/tcp
+```
+
+(BlueMap adds one more port later — I'll open 8100 when I get to it.)
+
+At this point the server is live and a friend can connect. The rest is making it nice.
 
 ## Giving it a face: MOTD and icon
 
@@ -77,13 +215,19 @@ This is where a small server earns its keep. Everything's from Hangar (Paper's p
 
 ### BlueMap — a live 3D web map
 
-BlueMap renders the world into a browsable 3D map you open in a browser. It runs its own little webserver on port 8100, which I opened in the firewall. You view it at `http://<server-ip>:8100`.
+BlueMap renders the world into a browsable 3D map you open in a browser. It runs its own little webserver on port 8100, which I opened in the firewall:
+
+```bash
+sudo ufw allow 8100/tcp
+```
+
+You view it at `http://<server-ip>:8100`.
 
 Worth knowing: mine is plain http and publicly reachable — anyone with the address can look at it. It's read-only, but it does reveal builds and base locations. For a trusted friend group that's a fine tradeoff; just go in eyes-open that the map is as public as its address is.
 
 ### Chunky — pre-generate the world
 
-New chunks are the laggy part of Minecraft: the game generates terrain the first time someone walks into it, and that's where the stutter comes from. Chunky generates it ahead of time, while nobody's around. I pre-generated a 3000-block radius around spawn:
+New chunks are the laggy part of Minecraft: the game generates terrain the first time someone walks into it, and that's where the stutter comes from. Chunky generates it ahead of time, while nobody's around. I pre-generated a 3000-block radius around spawn (typed in the server console, no slash):
 
 ```
 chunky radius 3000
@@ -94,8 +238,6 @@ chunky start
 ```
 
 It's CPU-heavy while it runs, so do it with friends offline. Progress survives restarts — `chunky pause` and `chunky continue` to manage it, `chunky progress` for an ETA. Nice bonus: BlueMap picks up the newly generated chunks automatically, so pre-genning also fills in the map.
-
-One thing that confused me early on: **server console commands take no leading slash.** The commands above are typed straight into the console as `chunky ...`. In-game as an op, the *same* commands take a leading `/`.
 
 ### AxGraves — death chests
 
@@ -129,7 +271,13 @@ For future me — always preview before you apply. Rollback params are `r:<n>` f
 
 ## Backups
 
-A nightly cron at 3am tars up the world folder. Nothing clever, but it means a bad day is a restore instead of a rebuild. Prism runs its own record purge at midnight, deliberately clear of the backup so they don't collide.
+A nightly cron tars up the world folder at 3am. Nothing fancy — a root crontab entry (`crontab -e`) like:
+
+```
+0 3 * * * tar -czf /home/minecraft/backups/world-$(date +\%F).tar.gz -C /home/minecraft/mcserver world
+```
+
+Gotcha in that line: inside a crontab, `%` is special and has to be escaped as `\%`, or cron silently mangles the command. Make the `backups` directory first, obviously. It means a bad day is a restore instead of a rebuild. Prism runs its own record purge at midnight, deliberately clear of the backup so they don't collide.
 
 ## The meta-lesson: pin your versions
 
