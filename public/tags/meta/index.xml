@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Posts on Cultivating Ideas</title>
-    <link>http://localhost:1313/cultivation-lab/posts/</link>
-    <description>Recent content in Posts on Cultivating Ideas</description>
+    <title>Meta on Cultivating Ideas</title>
+    <link>http://localhost:1313/cultivation-lab/tags/meta/</link>
+    <description>Recent content in Meta on Cultivating Ideas</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Aug 2026 09:02:38 -0500</lastBuildDate>
-    <atom:link href="http://localhost:1313/cultivation-lab/posts/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Hello World</title>
-      <link>http://localhost:1313/cultivation-lab/posts/hello-world/</link>
-      <pubDate>Sat, 08 Aug 2026 09:02:38 -0500</pubDate>
-      <guid>http://localhost:1313/cultivation-lab/posts/hello-world/</guid>
-      <description>&lt;p&gt;Hello world - this is my first post on the blog working entirely from the command line.&lt;/p&gt;</description>
-    </item>
+    <lastBuildDate>Sat, 08 Aug 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/cultivation-lab/tags/meta/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Built This Blog for Free with Hugo and GitHub Pages</title>
       <link>http://localhost:1313/cultivation-lab/posts/building-this-blog/</link>
